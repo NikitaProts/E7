@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1>
+          Post № {{ post['_id']}}
+        </h1>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-4 justify-content-center">
+        {% for key, value in post.items() %}
+              {% if key == '_id' %}
+                <b>ID:</b> {{ value }}<br>
+              {% endif %}
+              {% if key == 'author' %}
+                <b>Автор:</b> {{ value }}<br>
+              {% endif %}
+              {% if key == 'tags' %}
+                <b>Теги:</b>
+                {% for item in value %}
+                  {{ item }}
+                {% endfor %}<br>
+              {% endif %}
+              {% if key == 'text' %}
+                <b>Текст объявления:</b> {{ value }}<br>
+              {% endif %}
+              {% if key == 'pub_date' %}
+                <b>Дата публикации:</b> {{ value }}<br>
+              {% endif %}
+              {% if key == 'comments' %}
+                <b>Комментарии:</b><br>
+                {% for item in value %}
+                  {% for k, v in item.items() %}
+                    {% if k == 'author' %}
+                      <i>Имя:</i> {{ v }}.
+                    {% endif %}
+                    {% if k == 'comment' %}
+                      <i>Текст комментария:</i> {{ v }}<br>
+                    {% endif %}
+                  {% endfor %}
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>
